@@ -6,7 +6,7 @@ use App\Models\Kelas;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 
-class UsserController extends Controller
+class UserController extends Controller
 {
     public $userModel;
     public $kelasModel;

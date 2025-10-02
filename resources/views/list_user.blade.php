@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
-    <h1 class="mb-4">Daftar Pengguna</h1>
+<div class="card shadow-lg border-0 p-4" style="width: 90%; max-width: 900px; background: linear-gradient(135deg, #fbc2eb, #a6c1ee); color: #fff;">
+    <h2 class="text-center mb-4 fw-bold">🌸 Daftar Pengguna 🌸</h2>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
+    <table class="table table-hover align-middle text-center bg-white rounded-4 overflow-hidden shadow-sm">
+        <thead style="background-color: #ff8fab; color: white;">
             <tr>
                 <th>ID</th>
                 <th>Nama</th>
@@ -13,7 +13,7 @@
                 <th>Kelas</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="color: #555;">
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
