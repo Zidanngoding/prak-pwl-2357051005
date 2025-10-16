@@ -7,7 +7,7 @@ use App\Models\MataKuliah;
 
 class MataKuliahController extends Controller
 {
-    // Menampilkan daftar 
+    // Menampilkan daftar
     public function index()
     {
         $data = [
@@ -27,19 +27,49 @@ class MataKuliahController extends Controller
     // Menyimpan data baru ke database
     public function store(Request $request)
     {
-        // Validasi input
         $request->validate([
             'nama_mk' => 'required|string|max:100',
             'sks' => 'required|integer',
         ]);
 
-        // Simpan ke tabel mata_kuliah
         MataKuliah::create([
             'nama_mk' => $request->input('nama_mk'),
             'sks' => $request->input('sks'),
         ]);
 
-        // Redirect ke halaman daftar mata kuliah
         return redirect()->to('/matakuliah')->with('success', 'Data berhasil ditambahkan!');
+    }
+
+    // Menampilkan form edit dengan data lama
+    public function edit($id)
+    {
+        $mk = MataKuliah::findOrFail($id);
+        return view('edit_mk', ['title' => 'Edit Mata Kuliah', 'mk' => $mk]);
+    }
+
+    // Memperbarui data di database
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nama_mk' => 'required',
+            'sks' => 'required|integer|min:1|max:6',
+        ]);
+
+        $mk = MataKuliah::findOrFail($id);
+        $mk->update([
+            'nama_mk' => $request->input('nama_mk'),
+            'sks' => $request->input('sks'),
+        ]);
+
+        return redirect()->to('/matakuliah')->with('success', 'Data berhasil diperbarui!');
+    }
+
+    // Menghapus data
+    public function destroy($id)
+    {
+        $mk = MataKuliah::findOrFail($id);
+        $mk->delete();
+
+        return redirect()->to('/matakuliah')->with('success', 'Data berhasil dihapus!');
     }
 }
